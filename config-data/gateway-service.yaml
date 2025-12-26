@@ -1,0 +1,60 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: ms-inventory
+          uri: lb://ms-inventory
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - StripPrefix=1
+        - id: ms-rental
+          uri: lb://ms-rental
+          predicates:
+            - Path=/rental/**
+          filters:
+            - StripPrefix=1
+        - id: ms-clients
+          uri: lb://ms-clients
+          predicates:
+            - Path=/clients/**
+          filters:
+            - StripPrefix=1
+        - id: ms-users
+          uri: lb://ms-users
+          predicates:
+            - Path=/users/**
+          filters:
+            - StripPrefix=1
+        - id: ms-kardex
+          uri: lb://ms-kardex
+          predicates:
+            - Path=/kardex/**
+          filters:
+            - StripPrefix=1
+        - id: ms-amounts
+          uri: lb://ms-amounts
+          predicates:
+            - Path=/amounts/**
+          filters:
+            - StripPrefix=1
+        - id: ms-reports
+          uri: lb://ms-reports
+          predicates:
+            - Path=/reports/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
