@@ -5,8 +5,8 @@ spring:
   application:
     name: ms-kardex
   datasource:
-    url: jdbc:mysql://localhost:3306/toolrent_kardex?allowPublicKeyRetrieval=true&useSSL=false
-    username: tingeso
+    url: jdbc:mysql://mysql:3306/toolrent_kardex?allowPublicKeyRetrieval=true&useSSL=false
+    username: root
     password: 19Luna!Cody03
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
@@ -20,6 +20,6 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-service:8761/eureka/
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

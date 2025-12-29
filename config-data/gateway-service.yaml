@@ -9,52 +9,51 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
+          lower-case-service-id: false
       routes:
-        - id: ms-inventory
-          uri: lb://ms-inventory
+        - id: ms-inventory-tools
+          uri: lb://MS-INVENTORY
           predicates:
-            - Path=/inventory/**
-          filters:
-            - StripPrefix=1
+            - Path=/tools/**
+        - id: ms-inventory-categories
+          uri: lb://MS-INVENTORY
+          predicates:
+            - Path=/categories/**
         - id: ms-rental
-          uri: lb://ms-rental
+          uri: lb://MS-RENTAL
           predicates:
-            - Path=/rental/**
-          filters:
-            - StripPrefix=1
+            - Path=/rentals/**
         - id: ms-clients
-          uri: lb://ms-clients
+          uri: lb://MS-CLIENTS
           predicates:
-            - Path=/clients/**
-          filters:
-            - StripPrefix=1
+            - Path=/customers/**
         - id: ms-users
-          uri: lb://ms-users
+          uri: lb://MS-USERS
           predicates:
             - Path=/users/**
-          filters:
-            - StripPrefix=1
         - id: ms-kardex
-          uri: lb://ms-kardex
+          uri: lb://MS-KARDEX
           predicates:
             - Path=/kardex/**
-          filters:
-            - StripPrefix=1
         - id: ms-amounts
-          uri: lb://ms-amounts
+          uri: lb://MS-AMOUNTS
           predicates:
-            - Path=/amounts/**
-          filters:
-            - StripPrefix=1
+            - Path=/penalties/**
         - id: ms-reports
-          uri: lb://ms-reports
+          uri: lb://MS-REPORTS
           predicates:
             - Path=/reports/**
-          filters:
-            - StripPrefix=1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-service:8761/eureka/
