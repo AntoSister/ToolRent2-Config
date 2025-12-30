@@ -1,6 +1,13 @@
 server:
   port: 8080
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-service:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
 spring:
   application:
     name: gateway-service
@@ -10,6 +17,25 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: false
+      
+      # Configuración de CORS Global (Recomendada para K8s/Docker)
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns:
+              - "http://localhost:*"
+              - "http://127.0.0.1:*"
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "DELETE"
+              - "OPTIONS"
+              - "PATCH"
+            allowedHeaders: "*"
+            allowCredentials: true
+
       routes:
         - id: ms-inventory-tools
           uri: lb://MS-INVENTORY
@@ -52,8 +78,3 @@ management:
   endpoint:
     gateway:
       enabled: true
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-service:8761/eureka/
