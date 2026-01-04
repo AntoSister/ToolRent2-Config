@@ -49,6 +49,10 @@ spring:
           uri: lb://MS-RENTAL
           predicates:
             - Path=/rentals/**
+        - id: ms-rental-tools
+          uri: lb://MS-RENTAL
+          predicates:
+            - Path=/rentaltools/**
         - id: ms-clients
           uri: lb://MS-CLIENTS
           predicates:

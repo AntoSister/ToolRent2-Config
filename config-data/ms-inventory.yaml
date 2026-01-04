@@ -5,7 +5,7 @@ spring:
   application:
     name: ms-inventory
   datasource:
-    url: jdbc:mysql://mysql:3306/toolrent_inventory?allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://mysql:3306/toolrent_inventory?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
     username: root
     password: 19Luna!Cody03
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,7 +15,8 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        # dialect: org.hibernate.dialect.MySQL8Dialect # Deprecated in Hibernate 6, let it auto-detect
+        format_sql: true
 
 eureka:
   client:
